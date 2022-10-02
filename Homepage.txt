@@ -1,0 +1,118 @@
+import { timeline } from 'wix-animations'
+
+$w.onReady(function () {
+
+// spinning and color changing button 1
+const grey1 = $w('#button4');
+const orange1 = $w('#button7');
+const transparent1 = $w('#button1');
+
+const tl = timeline()
+    .add(grey1, { duration: 500, opacity: 0 })
+    .add(orange1, { duration: 750, rotate: 360 })
+    .add(grey1, { duration: 300, opacity: 1 })
+    .onComplete( () => {
+        transparent1.enable();
+    });
+
+transparent1.onClick(() => {
+    tl.replay();
+    transparent1.disable();
+});
+
+// spinning and color changing button 2
+const grey2 = $w('#button5');
+const orange2 = $w('#button8');
+const transparent2 = $w('#button2');
+
+const t2 = timeline()
+    .add(grey2, { duration: 500, opacity: 0 })
+    .add(orange2, { duration: 750, rotate: 360 })
+    .add(grey2, { duration: 300, opacity: 1 })
+    .onComplete( () => {
+        transparent2.enable();
+    });
+
+transparent2.onClick(() => {
+    t2.replay();
+    transparent2.disable();
+});
+
+// spinning and color changing button 3
+const grey3 = $w('#button6');
+const orange3 = $w('#button9');
+const transparent3 = $w('#button3');
+
+const t3 = timeline()
+    .add(grey3, { duration: 500, opacity: 0 })
+    .add(orange3, { duration: 750, rotate: 360 })
+    .add(grey3, { duration: 300, opacity: 1 })
+    .onComplete( () => {
+        transparent3.enable();
+    });
+
+transparent3.onClick(() => {
+    t3.replay();
+    transparent3.disable();
+});
+
+
+// click event 25 minute
+$w("#button1").onClick(function () {
+start1();
+});
+// click event 5 minute
+$w("#button2").onClick(function () {
+start2();
+});
+// click event 15 minute
+$w("#button3").onClick(function () {
+start3();
+});
+// click event reset
+$w("#button10").onClick(function () {
+reset();
+});
+});
+
+var interval1;
+var interval2;
+var interval3;
+
+// start 25 minute timer 
+function start1() { 
+interval1 = setInterval(increment1, 60000);
+}
+
+// start 5 minute timer 
+function start2() {
+interval2 = setInterval(increment2, 60000);
+}
+
+// start 15 minute timer 
+function start3() {
+interval3 = setInterval(increment3, 60000);
+}
+
+// increment timers by 1 every minute
+function increment1() {
+$w("#progressBar1").value += 1;
+}
+function increment2() {
+$w("#progressBar2").value += 1;
+}
+function increment3() {
+$w("#progressBar3").value += 1;
+}
+
+// reset bars
+function reset() {
+clearInterval(interval1);
+clearInterval(interval2);
+clearInterval(interval3);
+
+$w("#progressBar1").value = 0;
+$w("#progressBar2").value = 0;
+$w("#progressBar3").value = 0;
+}
+
